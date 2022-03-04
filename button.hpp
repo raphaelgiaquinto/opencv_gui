@@ -11,11 +11,11 @@
 class Button{        
 
     public:
-        
         cv::Rect rect;
         int r;
         int g;
         int b;
+        cv::Scalar color;
         std::string label;
         /**
          * @brief Construct a new Button object
@@ -26,7 +26,7 @@ class Button{
          * @param g color
          * @param b color
          */
-        Button(std::string label, cv::Rect rect, int r, int g, int b){
+        Button(std::string label, cv::Rect rect, int r, int g, int b) {
             this->label = label;
             this->rect = rect;
             this->r = r;

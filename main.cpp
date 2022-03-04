@@ -13,7 +13,7 @@ int main(){
 
     Window window("window", cv::Size(720, 480));
 
-    Button buttonA("button A", cv::Rect(50, 50, 150, 50), 255, 0, 0);
+    Button buttonA("button A", cv::Rect(50, 50, 150, 100), 120, 120, 120);
     
     buttonA.setFunction(clickA);
 
