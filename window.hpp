@@ -4,7 +4,11 @@
 #include <string>
 #include <opencv2/opencv.hpp>
 #include "button.hpp"
-
+/**
+ * @brief Window, 
+ * 
+ * One per session
+ */
 class Window{
 
     public:
@@ -15,7 +19,12 @@ class Window{
         int exitCode;
         
         Window(){}
-
+        /**
+         * @brief Construct a new Window object
+         * 
+         * @param name window name
+         * @param size (width, height)
+         */
         Window(std::string name, cv::Size size){
             this->name = name;
             this->size = size;
@@ -24,7 +33,7 @@ class Window{
             cv::namedWindow(this->name);
         }
 
-        void setImage(cv::Mat image){
+        void setImage(cv::Mat image) { 
             this->image = image;
             cv::resize(this->image, this->image, this->size);
         }
@@ -33,6 +42,11 @@ class Window{
             this->buttons.push_back(button);
         }
 
+        /**
+         * @brief Display the window
+         * 
+         * Draws the image and all of the buttons attached to the window
+         */
         void show() {
     
             while(this->exitCode != (int) cv::waitKey(25)) {
@@ -63,6 +77,13 @@ static void callback(int event, int x, int y, int flags, void* img) {
     }
 }
 
+/**
+ * @brief Initializes mouse callback
+ * 
+ * Activates buttons callbacks
+ * 
+ * @param window 
+ */
 static void initMouseCallback(Window window) {
     globalWindow = window;
     cv::setMouseCallback(window.name, callback, 0);
