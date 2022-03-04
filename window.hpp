@@ -74,7 +74,7 @@ class Window{
                 cv::rectangle(this->image, border, borderColor, cv::FILLED);
                 cv::rectangle(this->image, container, b.getColor(), cv::FILLED);
 
-                cv::putText(this->image, b.label, cv::Point(container.x + marginx, container.y + container.height - marginy), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(255 - b.b, 255 - b.g, 255 - b.r), 2, 8, false);
+                cv::putText(this->image, b.label, cv::Point(container.x + marginx, container.y + container.height - marginy), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(255 - b.b, 255 - b.g, 255 - b.r), 1, 8, false);
             }
             cv::imshow(this->name, this->image);
         }
