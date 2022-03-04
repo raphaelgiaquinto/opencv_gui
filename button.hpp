@@ -7,6 +7,11 @@
 /**
  * @brief Button
  * 
+ * @param label button text
+ * @param rect (x,y) and (width, height)
+ * @param r color
+ * @param g color
+ * @param b color
  */
 class Button{        
 
@@ -15,6 +20,7 @@ class Button{
         int r;
         int g;
         int b;
+        bool hover;
         cv::Scalar color;
         std::string label;
         /**
@@ -32,12 +38,25 @@ class Button{
             this->r = r;
             this->g = g;
             this->b = b;
+            this->hover = false;
         }
         
         void (*function)(void);
 
         cv::Scalar getColor() {
-            return cv::Scalar(this->b, this->g, this->r);
+            return cv::Scalar((this->hover) ? 255 - this->b : this->b, (this->hover) ? 255 - this->g : this->g, (this->hover) ? 255 - this->r : this->r);
+        }
+
+        int getR(){
+            return this->hover ? 255 - this-> r : this->r;
+        }
+
+        int getG(){
+            return this->hover ? 255 - this-> g : this->g;
+        }
+
+        int getB(){
+            return this->hover ? 255 - this-> b : this->b;
         }
 
         /**

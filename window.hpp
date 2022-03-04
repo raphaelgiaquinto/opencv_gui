@@ -5,9 +5,10 @@
 #include <opencv2/opencv.hpp>
 #include "button.hpp"
 /**
- * @brief Window, 
+ * @brief Window, one per session only
  * 
- * One per session
+ * @param name window name
+ * @param size (width, height)
  */
 class Window{
 
@@ -69,12 +70,12 @@ class Window{
                 int marginy = scale == scaley ? 0 : (int)((double) container.height * (scaley - scale) / scaley * 0.5);
                 
                 
-                cv::Scalar borderColor(b.b/2, b.g/2, b.r/2);
+                cv::Scalar borderColor(b.getB()/2, b.getG()/2, b.getR()/2);
 
                 cv::rectangle(this->image, border, borderColor, cv::FILLED);
                 cv::rectangle(this->image, container, b.getColor(), cv::FILLED);
 
-                cv::putText(this->image, b.label, cv::Point(container.x + marginx, container.y + container.height - marginy), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(255 - b.b, 255 - b.g, 255 - b.r), 1, 8, false);
+                cv::putText(this->image, b.label, cv::Point(container.x + marginx, container.y + container.height - marginy), cv::FONT_HERSHEY_SIMPLEX, scale, cv::Scalar(255 - b.getB(), 255 - b.getG(), 255 - b.getR()), 1, 8, false);
             }
             cv::imshow(this->name, this->image);
         }
@@ -104,6 +105,12 @@ static void callback(int event, int x, int y, int flags, void* img) {
             if(button.rect.contains(cv::Point2i(x, y))){
                 button.function();
             }
+        }
+    }
+
+    if(event == cv::EVENT_MOUSEMOVE) {
+        for(auto& button: globalWindow.buttons) {
+            button.hover = button.rect.contains(cv::Point2i(x, y));
         }
     }
 }
