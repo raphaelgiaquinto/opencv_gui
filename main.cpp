@@ -15,11 +15,11 @@ int main(){
 
     Button buttonA("button A", cv::Rect(50, 50, 150, 100), 120, 120, 120);
     
-    buttonA.setFunction(clickA);
+    buttonA.onClick(clickA);
 
     Button buttonB("button B", cv::Rect(250, 50, 150, 50), 0, 255, 0);
     
-    buttonB.setFunction(clickB);
+    buttonB.onClick(clickB);
 
     window.addButton(buttonA);
     window.addButton(buttonB);

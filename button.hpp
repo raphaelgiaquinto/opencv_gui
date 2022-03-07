@@ -60,11 +60,11 @@ class Button{
         }
 
         /**
-         * @brief Set the Function object
+         * @brief Sets the callback function triggered on click
          * 
-         * @param f callback function triggered on click
+         * @param f function
          */
-        void setFunction(void (*f)(void)){
+        void onClick(void (*f)(void)){
             this->function = f;
         }
 
