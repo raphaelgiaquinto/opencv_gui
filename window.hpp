@@ -3,6 +3,7 @@
 
 #include <string>
 #include <opencv2/opencv.hpp>
+#include <vector>
 #include "button.hpp"
 /**
  * @brief Window, one per session only
@@ -97,20 +98,24 @@ class Window{
 };
 
 
-Window globalWindow;
+std::vector<Window> windows;
 
 static void callback(int event, int x, int y, int flags, void* img) {
     if(event == cv::EVENT_LBUTTONDOWN){
-        for(auto& button: globalWindow.buttons) {
-            if(button.rect.contains(cv::Point2i(x, y))){
-                button.function();
+        for(auto &win: windows){
+            for(auto& button: win.buttons) {
+                if(button.rect.contains(cv::Point2i(x, y))){
+                    button.function();
+                }
             }
         }
     }
 
     if(event == cv::EVENT_MOUSEMOVE) {
-        for(auto& button: globalWindow.buttons) {
-            button.hover = button.rect.contains(cv::Point2i(x, y));
+        for(auto &win: windows){
+            for(auto& button: win.buttons) {
+                button.hover = button.rect.contains(cv::Point2i(x, y));
+            }
         }
     }
 }
@@ -123,7 +128,7 @@ static void callback(int event, int x, int y, int flags, void* img) {
  * @param window 
  */
 static void initMouseCallback(Window window) {
-    globalWindow = window;
+    windows.push_back(window);
     cv::setMouseCallback(window.name, callback, 0);
 }
 
