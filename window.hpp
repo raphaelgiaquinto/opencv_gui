@@ -6,7 +6,7 @@
 #include <vector>
 #include "button.hpp"
 /**
- * @brief Window, one per session only
+ * @brief Window
  * 
  * @param name window name
  * @param size (width, height)
@@ -46,7 +46,7 @@ class Window{
         
         /**
          * @brief Draws the image and all of the buttons attached to the window
-         * 
+         * Buttons with border and color
          */
         void draw() {
             for(auto& b: this->buttons) {
